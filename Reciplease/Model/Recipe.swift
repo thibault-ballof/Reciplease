@@ -7,7 +7,7 @@
 
 import Foundation
 struct Recipe {
-    let label: String
+    var label: String
     let image: String
 
 }
