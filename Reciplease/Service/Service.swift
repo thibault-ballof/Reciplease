@@ -57,8 +57,8 @@ init(session: URLSession) {
                 ingredientsParams += ","
             }
         }
-    
-        return URLRequest(url: URL(string: "https://api.edamam.com/search?q=" + ingredientsParams + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
+        let escapedString = ingredientsParams.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        return URLRequest(url: URL(string: "https://api.edamam.com/search?q=" + escapedString + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
     }
     
     
