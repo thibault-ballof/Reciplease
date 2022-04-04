@@ -23,13 +23,13 @@ init(session: URLSession) {
     self.session = session
 }
 // MARK: - API CONFIGURATION
-    func getTranslate(ingredient: String, callback: @escaping (Bool, Recipe?) -> Void)  {
+    func getTranslate(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
    
     
     var request = createURL(ingredient: ingredient)
     request.httpMethod = "GET"
     task = session.dataTask(with: request) { (data, response, error) in
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async {
             guard let data = data, error == nil else {
                 callback(false, nil)
                 return
@@ -42,24 +42,25 @@ init(session: URLSession) {
                 callback(false, nil)
                 return
             }
-            let recipe = createRecipeObject(data: responseJSON)
-            callback(true, recipe)
+            
+            callback(true, responseJSON)
         }
     }
     
     task?.resume()
 }
-    func createURL(ingredient: String) -> URLRequest{
-        return URLRequest(url: URL(string: "https://api.edamam.com/search?q=chicken&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
+    func createURL(ingredient: [String]) -> URLRequest{
+        var ingredientsParams: String = ""
+        for i in 0 ..< ingredient.count {
+            ingredientsParams += ingredient[i]
+            if i+1 < ingredient.count {
+                ingredientsParams += ","
+            }
+        }
+    
+        return URLRequest(url: URL(string: "https://api.edamam.com/search?q=" + ingredientsParams + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
     }
     
-    func createRecipeObject(data: RecipeData) -> Recipe {
-        let label = data.hits[0].recipe.label
-       
-        let image = data.hits[0].recipe.image
-       
-        
-        return Recipe(label: label, image: image)
-    }
+    
 }
 

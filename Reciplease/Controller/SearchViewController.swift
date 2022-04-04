@@ -9,6 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    var ingredients: [String] = []
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,12 +18,14 @@ class SearchViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    var ingredients: [String] = []
+    
     @IBAction func addButton(_ sender: Any) {
         if let ingredientTextField = ingredientTextField.text {
             ingredients.append(ingredientTextField)
             tableView.reloadData()
+            print(ingredients)
         }
+        
     }
     
    
@@ -31,7 +35,16 @@ class SearchViewController: UIViewController {
         ingredients = []
         tableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let RecipeVC = segue.destination as? RecipeViewController else { return }
+        RecipeVC.ingredients = ingredients
+    }
+    
+   
 }
+
+
 
 
     

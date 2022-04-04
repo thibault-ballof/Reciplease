@@ -11,16 +11,14 @@ struct RecipeData: Codable {
     
     let hits: [Hits]
     
-    struct Hits: Codable {
-        let recipe: Recipe
-        
-        struct Recipe: Codable {
+}
+struct Hits: Codable {
+    let recipe: Recipe
+}
+struct Recipe: Codable {
 
-            let label: String
-            let image: String
-            let ingredientLines: [String]
-          
-        }
-        
-    }
+    let label: String
+    let image: String
+    let ingredientLines: [String]
+  
 }

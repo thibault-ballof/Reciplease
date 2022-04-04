@@ -6,26 +6,36 @@
 //
 
 import UIKit
-class RecipeCell: UITableViewCell {
-    
-    @IBOutlet weak var label: UILabel!
-}
 
-class RecipeViewController: UIViewController, UITableViewDataSource {
 
-    
+class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    var recipes: RecipeData = RecipeData(hits: [Hits]())
+    var ingredients: [String] = []
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getRecipes()
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-    func updateView(from data: Recipe, label: UILabel) {
-        label.text = data.label
+  
+
+    func getRecipes() {
+        Service.shared.getTranslate(ingredient: ingredients) { (sucess, recipe) in
+            if sucess {
+                self.recipes = recipe!
+                self.tableView.reloadData()
+               
+            }
+            
+        }
     }
-
-
+ 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
@@ -33,12 +43,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
            return UITableViewCell()
 
         }
-            Service.shared.getTranslate(ingredient: "") { (sucess, recipe) in
-                if sucess {
-                    self.updateView(from: recipe!, label: cell.label)
-                }
-                
-            }
+        cell.label.text = recipes.hits[indexPath.row].recipe.label
          
             return cell
         }
@@ -48,6 +53,6 @@ class RecipeViewController: UIViewController, UITableViewDataSource {
        }
 
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return 1
+           return recipes.hits.count
        }
 }
