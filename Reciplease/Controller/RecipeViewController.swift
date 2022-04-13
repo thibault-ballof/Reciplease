@@ -6,11 +6,12 @@
 //
 
 import UIKit
-
+import CoreData
 
 class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var recipes: RecipeData = RecipeData(hits: [Hits]())
     var ingredients: [String] = []
+    var selectedRecipe: Recipe!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
 
         }
         cell.label.text = recipes.hits[indexPath.row].recipe.label
-         
+       
             return cell
         }
         
@@ -55,4 +56,25 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
            return recipes.hits.count
        }
+    
+    //MARK: - Send data to DetailRecipeViewController
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+                print("test")
+                selectedRecipe = recipes.hits[indexPath.row].recipe
+                performSegue(withIdentifier: "PassData", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PassData" {
+            print(selectedRecipe.label)
+            guard let DetailRecipeVC = segue.destination as? DetailRecipeViewController else { return }
+            DetailRecipeVC.recipe = selectedRecipe
+            
+        }
+    
+       
+    }
+
 }

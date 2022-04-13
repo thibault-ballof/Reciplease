@@ -15,6 +15,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
     
@@ -23,9 +26,10 @@ class SearchViewController: UIViewController {
         if let ingredientTextField = ingredientTextField.text {
             ingredients.append(ingredientTextField)
             tableView.reloadData()
+            
             print(ingredients)
         }
-        
+        ingredientTextField.text = "" 
     }
     
    

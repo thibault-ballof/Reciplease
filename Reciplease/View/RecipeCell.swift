@@ -26,6 +26,7 @@ class RecipeCell: UITableViewCell {
 
     }
 
+    @IBOutlet weak var labelFavorite: UILabel!
     @IBOutlet weak var label: UILabel!
 }
 
