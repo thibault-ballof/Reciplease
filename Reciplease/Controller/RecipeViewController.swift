@@ -8,10 +8,14 @@
 import UIKit
 import CoreData
 
-class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecipeViewController: UIViewController {
+    
+    //MARK: - Variables
     var recipes: RecipeData = RecipeData(hits: [Hits]())
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
+    
+    //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +24,6 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-  
 
     func getRecipes() {
         Service.shared.getTranslate(ingredient: ingredients) { (sucess, recipe) in
@@ -33,39 +36,6 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
  
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
-
-           return UITableViewCell()
-
-        }
-        cell.label.text = recipes.hits[indexPath.row].recipe.label
-       
-            return cell
-        }
-        
-       func numberOfSections(in tableView: UITableView) -> Int {
-          return 1
-       }
-
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return recipes.hits.count
-       }
-    
-    //MARK: - Send data to DetailRecipeViewController
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-                print("test")
-                selectedRecipe = recipes.hits[indexPath.row].recipe
-                performSegue(withIdentifier: "PassData", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PassData" {
             print(selectedRecipe.label)

@@ -8,9 +8,12 @@
 import UIKit
 import CoreData
 
-class FavoriteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FavoriteViewController: UIViewController {
+    //MARK: - Variables
     var recipes = [FavoriteRecipes]()
+    var selectedRecipe = FavoriteRecipes()
     
+    //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -22,29 +25,15 @@ class FavoriteViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.reloadData()
         
     }
-    
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PassFavoriteData" {
             
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
-
-           return UITableViewCell()
-
+            guard let FavoriteDetailRecipeVC = segue.destination as? DetailFavoriteViewController else { return }
+            FavoriteDetailRecipeVC.recipes = selectedRecipe
+            
         }
-        cell.labelFavorite.text = recipes[indexPath.row].label
+    
        
-            return cell
-        }
-        
-       func numberOfSections(in tableView: UITableView) -> Int {
-          return 1
-       }
+    }
 
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return recipes.count
-       }
 }

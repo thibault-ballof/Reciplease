@@ -8,10 +8,13 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    
+    //MARK: - Variables
     var ingredients: [String] = []
     
+    //MARK: -Outlets
+    @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -20,7 +23,6 @@ class SearchViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func addButton(_ sender: Any) {
         if let ingredientTextField = ingredientTextField.text {
@@ -31,9 +33,8 @@ class SearchViewController: UIViewController {
         }
         ingredientTextField.text = "" 
     }
-    
    
-    @IBOutlet weak var ingredientTextField: UITextField!
+   
     
     @IBAction func clearButton(_ sender: Any) {
         ingredients = []
