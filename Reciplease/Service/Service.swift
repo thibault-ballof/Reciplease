@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class Service {
     
@@ -14,16 +15,15 @@ static var shared = Service()
 private init() {}
 var task: URLSessionDataTask?
 
-// MARK: - VARIABLE FOR API CALL
-var entryText = ""
-var convertedText = ""
+
+
 // MARK: - INJECT DEPENDENCY
 private var session = URLSession(configuration: .default)
 init(session: URLSession) {
     self.session = session
 }
 // MARK: - API CONFIGURATION
-    func getTranslate(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
+    func getRecipes(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
    
     
     var request = createURL(ingredient: ingredient)
@@ -61,6 +61,6 @@ init(session: URLSession) {
         return URLRequest(url: URL(string: "https://api.edamam.com/search?q=" + escapedString + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
     }
     
-    
+   
 }
 

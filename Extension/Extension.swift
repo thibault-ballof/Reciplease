@@ -94,6 +94,7 @@ extension FavoriteViewController:  UITableViewDataSource, UITableViewDelegate {
         selectedRecipe = recipes[indexPath.row]
                 performSegue(withIdentifier: "PassFavoriteData", sender: self)
     }
+    
 
 }
 //MARK: - DetailRecipeViewController

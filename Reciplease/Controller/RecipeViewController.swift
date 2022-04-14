@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
     }
 
     func getRecipes() {
-        Service.shared.getTranslate(ingredient: ingredients) { (sucess, recipe) in
+        Service.shared.getRecipes(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 self.recipes = recipe!
                 self.tableView.reloadData()

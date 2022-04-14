@@ -14,6 +14,7 @@ class DetailRecipeViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
   
     override func viewDidLoad() {
@@ -38,6 +39,7 @@ class DetailRecipeViewController: UIViewController {
         } catch {
             print("error")
         }
+        
     }
 
 }

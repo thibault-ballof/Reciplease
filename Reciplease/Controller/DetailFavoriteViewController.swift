@@ -11,7 +11,6 @@ class DetailFavoriteViewController: UIViewController {
     //MARK: - Variables
     var recipes = FavoriteRecipes()
     var countIngredientsList = 0
-
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +20,14 @@ class DetailFavoriteViewController: UIViewController {
         super.viewDidLoad()
         countIngredientsList =  recipes.ingredientsLine!.count
         // Do any additional setup after loading the view.
+        
+
     }
     
- 
+    @IBAction func removeFavoriteButton(_ sender: Any) {
+        CoreDataStack.sharedInstance.viewContext.delete(recipes)
+       try? CoreDataStack.sharedInstance.viewContext.save()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+    }
+    
 }
