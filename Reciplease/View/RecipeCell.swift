@@ -25,8 +25,17 @@ class RecipeCell: UITableViewCell {
        // Configure the view for the selected state
 
     }
+    override func layoutSubviews() {
+          super.layoutSubviews()
+          //set the values for top,left,bottom,right margins
+          let margins = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
+          contentView.frame = contentView.frame.inset(by: margins)
+          contentView.layer.cornerRadius = 25
+    }
 
+    @IBOutlet weak var indregredientsListLabel: UILabel!
     @IBOutlet weak var labelFavorite: UILabel!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var recipeImage: UIImageView!
 }
 

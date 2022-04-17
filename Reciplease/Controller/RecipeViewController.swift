@@ -14,7 +14,7 @@ class RecipeViewController: UIViewController {
     var recipes: RecipeData = RecipeData(hits: [Hits]())
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
-    
+    private let recipeService = Service()
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -26,13 +26,11 @@ class RecipeViewController: UIViewController {
     }
 
     func getRecipes() {
-        Service.shared.getRecipes(ingredient: ingredients) { (sucess, recipe) in
+        recipeService.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 self.recipes = recipe!
-                self.tableView.reloadData()
-               
+                self.tableView.reloadData()       
             }
-            
         }
     }
  

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DetailRecipeViewController: UIViewController {
     //MARK: - Variables
@@ -15,12 +16,28 @@ class DetailRecipeViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var recipeImage: UIImageView!
     
   
+    @IBAction func getDirection(_ sender: Any) {
+        if let url = URL(string: recipe.url) {
+            UIApplication.shared.open(url)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         label.text = recipe.label
+        AF.request( recipe.image,method: .get).response{ response in
+
+           switch response.result {
+            case .success(let responseData):
+               self.recipeImage.image = UIImage(data: responseData!)
+
+            case .failure(let error):
+                print("error--->",error)
+            }
+        }
         // Do any additional setup after loading the view.
     }
     

@@ -5,6 +5,7 @@
 //  Created by Thibault Ballof on 21/03/2022.
 //
 import UIKit
+import Alamofire
 //MARK: - SearchViewController
 
 extension SearchViewController: UITableViewDataSource {
@@ -28,7 +29,7 @@ extension SearchViewController: UITableViewDataSource {
 
 extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 250
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,6 +40,23 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
 
         }
         cell.label.text = recipes.hits[indexPath.row].recipe.label
+        var indregientsLine: String = ""
+        for i in 0 ..< recipes.hits[indexPath.row].recipe.ingredientLines.count {
+            indregientsLine += recipes.hits[indexPath.row].recipe.ingredientLines[i]
+            cell.indregredientsListLabel.text = indregientsLine
+        }
+        
+        
+        AF.request( "\(recipes.hits[indexPath.row].recipe.image)",method: .get).response{ response in
+
+           switch response.result {
+            case .success(let responseData):
+               cell.recipeImage.image = UIImage(data: responseData!)
+
+            case .failure(let error):
+                print("error--->",error)
+            }
+        }
        
             return cell
         }

@@ -6,8 +6,6 @@
 //
 
 import Foundation
-struct RecipeObject {
-    var label: String
-    let image: String
-
+class Recipes {
+    
 }
