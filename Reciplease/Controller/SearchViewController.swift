@@ -28,10 +28,10 @@ class SearchViewController: UIViewController {
             ingredients.append(ingredientTextField)
             tableView.reloadData()
         }
-        ingredientTextField.text = "" 
+        ingredientTextField.text = ""
     }
-   
-
+    
+    
     
     @IBAction func clearButton(_ sender: Any) {
         ingredients = []
@@ -44,7 +44,7 @@ class SearchViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-    guard let RecipeVC = segue.destination as? RecipeViewController else { return }
+        guard let RecipeVC = segue.destination as? RecipeViewController else { return }
         RecipeVC.ingredients = ingredients
     }
 }
@@ -52,5 +52,5 @@ class SearchViewController: UIViewController {
 
 
 
-    
+
 

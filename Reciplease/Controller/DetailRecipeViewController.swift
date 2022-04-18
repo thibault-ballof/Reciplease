@@ -18,22 +18,18 @@ class DetailRecipeViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     
-  
-    @IBAction func getDirection(_ sender: Any) {
-        if let url = URL(string: recipe.url) {
-            UIApplication.shared.open(url)
-        }
-    }
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         label.text = recipe.label
         AF.request( recipe.image,method: .get).response{ response in
-
-           switch response.result {
+            
+            switch response.result {
             case .success(let responseData):
-               self.recipeImage.image = UIImage(data: responseData!)
-
+                self.recipeImage.image = UIImage(data: responseData!)
+                
             case .failure(let error):
                 print("error--->",error)
             }
@@ -41,6 +37,11 @@ class DetailRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func getDirection(_ sender: Any) {
+        if let url = URL(string: recipe.url) {
+            UIApplication.shared.open(url)
+        }
+    }
     
     @IBAction func favoriteButton(_ sender: Any) {
         saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines)
@@ -51,6 +52,9 @@ class DetailRecipeViewController: UIViewController {
         favoriteRecipe.label = name
         favoriteRecipe.image = image
         favoriteRecipe.ingredientsLine = ingredientLines
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+        
         do {
             try CoreDataStack.sharedInstance.viewContext.save()
         } catch {
@@ -58,5 +62,5 @@ class DetailRecipeViewController: UIViewController {
         }
         
     }
-
+    
 }

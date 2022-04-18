@@ -18,18 +18,11 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request: NSFetchRequest<FavoriteRecipes> = FavoriteRecipes.fetchRequest()
-        guard let recipe = try? CoreDataStack.sharedInstance.viewContext.fetch(request) else { return }
         
-        recipes = recipe
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-        tableView.reloadData()
-        
+        self.fetchFavorites()
     }
-    override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    tableView.reloadData()
-    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PassFavoriteData" {
             
@@ -37,11 +30,19 @@ class FavoriteViewController: UIViewController {
             FavoriteDetailRecipeVC.recipes = selectedRecipe
             
         }
-    
-       
+        
+        
     }
-
+    
     @objc func refresh() {
+        self.fetchFavorites()
+    }
+    
+    func fetchFavorites() {
+        let request: NSFetchRequest<FavoriteRecipes> = FavoriteRecipes.fetchRequest()
+        guard let recipe = try? CoreDataStack.sharedInstance.viewContext.fetch(request) else { return }
+        
+        recipes = recipe
         tableView.reloadData()
     }
 }

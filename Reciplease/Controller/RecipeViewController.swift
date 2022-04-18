@@ -24,7 +24,7 @@ class RecipeViewController: UIViewController {
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
-
+    
     func getRecipes() {
         recipeService.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
@@ -33,7 +33,7 @@ class RecipeViewController: UIViewController {
             }
         }
     }
- 
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PassData" {
             print(selectedRecipe.label)
@@ -41,8 +41,8 @@ class RecipeViewController: UIViewController {
             DetailRecipeVC.recipe = selectedRecipe
             
         }
-    
-       
+        
+        
     }
-
+    
 }
