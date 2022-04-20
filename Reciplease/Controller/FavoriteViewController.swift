@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class FavoriteViewController: UIViewController {
     //MARK: - Variables
@@ -45,4 +46,53 @@ class FavoriteViewController: UIViewController {
         recipes = recipe
         tableView.reloadData()
     }
+}
+
+
+extension FavoriteViewController:  UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
+            
+            return UITableViewCell()
+            
+        }
+        cell.favoriteIngredientsListLabel.text = recipes[indexPath.row].ingredientsLine?.joined(separator: ",")
+        cell.labelFavorite.text = recipes[indexPath.row].label
+        
+        
+        
+        AF.request( recipes[indexPath.row].image!,method: .get).response{ response in
+            
+            switch response.result {
+            case .success(let responseData):
+                cell.favoriteRecipeImage.image = UIImage(data: responseData!)
+                
+            case .failure(let error):
+                print("error--->",error)
+            }
+        }
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        selectedRecipe = recipes[indexPath.row]
+        performSegue(withIdentifier: "PassFavoriteData", sender: self)
+    }
+    
+    
 }

@@ -28,7 +28,6 @@
 		63EFC16127E8E2DC00ECB49C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFC16027E8E2DC00ECB49C /* Service.swift */; };
 		63EFC16327E8E62100ECB49C /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFC16227E8E62100ECB49C /* RecipeData.swift */; };
 		63EFC16727E8F32D00ECB49C /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFC16627E8F32D00ECB49C /* RecipeViewController.swift */; };
-		63EFC16A27E8F3BD00ECB49C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EFC16927E8F3BD00ECB49C /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +72,6 @@
 		63EFC16027E8E2DC00ECB49C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		63EFC16227E8E62100ECB49C /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		63EFC16627E8F32D00ECB49C /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
-		63EFC16927E8F3BD00ECB49C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +206,6 @@
 		63EFC16827E8F3AF00ECB49C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				63EFC16927E8F3BD00ECB49C /* Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 				633C1F1027E884640047BFDA /* AppDelegate.swift in Sources */,
 				63A0F50328019C43005A2D66 /* DetailRecipeViewController.swift in Sources */,
 				63B3BF4C27FAE1510032DAC1 /* RecipeCell.swift in Sources */,
-				63EFC16A27E8F3BD00ECB49C /* Extension.swift in Sources */,
 				63A0F501280191F6005A2D66 /* CoreDataStack.swift in Sources */,
 				633C1F1227E884640047BFDA /* SceneDelegate.swift in Sources */,
 				635F3D7727E8CB4D001439B0 /* FavoriteViewController.swift in Sources */,

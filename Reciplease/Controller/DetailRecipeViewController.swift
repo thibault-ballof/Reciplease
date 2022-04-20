@@ -64,3 +64,20 @@ class DetailRecipeViewController: UIViewController {
     }
     
 }
+
+
+extension DetailRecipeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailIngredientCell", for: indexPath)
+        cell.textLabel?.text = "\(recipe.ingredientLines[indexPath.row])"
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recipe.ingredientLines.count
+    }
+}

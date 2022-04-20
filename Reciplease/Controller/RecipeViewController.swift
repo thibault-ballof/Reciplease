@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class RecipeViewController: UIViewController {
     
@@ -45,4 +46,57 @@ class RecipeViewController: UIViewController {
         
     }
     
+}
+
+extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
+            
+            return UITableViewCell()
+            
+        }
+        cell.totalTimeLabel.text = "\(recipes.hits[indexPath.row].recipe.totalTime)"
+        cell.label.text = recipes.hits[indexPath.row].recipe.label
+        var indregientsLine: String = ""
+        for i in 0 ..< recipes.hits[indexPath.row].recipe.ingredientLines.count {
+            indregientsLine += recipes.hits[indexPath.row].recipe.ingredientLines[i]
+            cell.indregredientsListLabel.text = indregientsLine
+        }
+        
+        
+        AF.request( "\(recipes.hits[indexPath.row].recipe.image)",method: .get).response{ response in
+            
+            switch response.result {
+            case .success(let responseData):
+                cell.recipeImage.image = UIImage(data: responseData!)
+                
+            case .failure(let error):
+                print("error--->",error)
+            }
+        }
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recipes.hits.count
+    }
+    
+    // Send data to DetailRecipeViewController
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        print("test")
+        selectedRecipe = recipes.hits[indexPath.row].recipe
+        performSegue(withIdentifier: "PassData", sender: self)
+    }
 }
