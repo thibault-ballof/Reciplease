@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class DetailRecipeViewController: UIViewController {
     //MARK: - Variables
@@ -19,12 +20,12 @@ class DetailRecipeViewController: UIViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         label.text = recipe.label
-        AF.request( recipe.image,method: .get).response{ response in
+        AF.request( recipe.image,method: .get).response { response in
             
             switch response.result {
             case .success(let responseData):
@@ -49,19 +50,40 @@ class DetailRecipeViewController: UIViewController {
     
     func saveFavoriteButton(name: String, image: String, ingredientLines: [String]) {
         let favoriteRecipe = FavoriteRecipes(context: CoreDataStack.sharedInstance.viewContext)
-        favoriteRecipe.label = name
-        favoriteRecipe.image = image
-        favoriteRecipe.ingredientsLine = ingredientLines
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-        
-        do {
-            try CoreDataStack.sharedInstance.viewContext.save()
-        } catch {
-            print("error")
-        }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipes")
+        let predicate = NSPredicate(format: "label == %@", name)
+        request.predicate = predicate
+        request.fetchLimit = 1
+
+        do{
+            let count = try CoreDataStack.sharedInstance.viewContext.count(for: request)
+            if(count == 0){
+                favoriteRecipe.label = name
+                favoriteRecipe.image = image
+                favoriteRecipe.ingredientsLine = ingredientLines
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                
+                do {
+                    try CoreDataStack.sharedInstance.viewContext.save()
+                } catch {
+                    print("error")
+                }
+            }
+            else{
+            // at least one matching object exists
+                let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
+          }
+        catch let error as NSError {
+             print("Could not fetch \(error), \(error.userInfo)")
+          }
         
     }
+    
+    
     
 }
 

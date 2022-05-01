@@ -103,7 +103,6 @@
 		633C1F0327E884640047BFDA = {
 			isa = PBXGroup;
 			children = (
-				63EFC16827E8F3AF00ECB49C /* Extension */,
 				633C1F0E27E884640047BFDA /* Reciplease */,
 				633C1F2827E884670047BFDA /* RecipleaseTests */,
 				633C1F3227E884670047BFDA /* RecipleaseUITests */,
@@ -201,13 +200,6 @@
 				63A0F500280191F6005A2D66 /* CoreDataStack.swift */,
 			);
 			path = "Core Data";
-			sourceTree = "<group>";
-		};
-		63EFC16827E8F3AF00ECB49C /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

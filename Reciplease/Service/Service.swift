@@ -9,46 +9,7 @@ import Foundation
 import Alamofire
 
 class Service {
-    
-    
-    //static var shared = Service()
-    //private init() {}
-    //var task: URLSessionDataTask?
-    
-    
-    
-    // MARK: - INJECT DEPENDENCY
-    //private var session = URLSession(configuration: .default)
-    //init(session: URLSession) {
-    // self.session = session
-    //}
-    // MARK: - API CONFIGURATION
-    /* func getRecipes(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
-     
-     
-     var request = createURL(ingredient: ingredient)
-     request.httpMethod = "GET"
-     task = session.dataTask(with: request) { (data, response, error) in
-     DispatchQueue.main.async {
-     guard let data = data, error == nil else {
-     callback(false, nil)
-     return
-     }
-     guard  let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-     callback(false, nil)
-     return
-     }
-     guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: data) else {
-     callback(false, nil)
-     return
-     }
-     
-     callback(true, responseJSON)
-     }
-     }
-     
-     task?.resume()
-     }*/
+  
     
     func createURL(ingredient: [String]) -> URLRequest{
         var ingredientsParams: String = ""
@@ -66,7 +27,7 @@ class Service {
     func fetch(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
         
         
-        var makeUrl = createURL(ingredient: ingredient)
+        let makeUrl = createURL(ingredient: ingredient)
         let request = AF.request(makeUrl)
         
         request.response { (data) in
