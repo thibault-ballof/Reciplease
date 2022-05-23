@@ -35,6 +35,7 @@ class ServiceTest: XCTestCase {
             let data: Data? = nil
             return (response, data, error)
         }
+        
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
         let urlSession = URLSession.init(configuration: configuration)
@@ -42,14 +43,16 @@ class ServiceTest: XCTestCase {
         
         //When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        service.fetch(ingredient: [""]) { (success, recipe) in
+        service.fetch(ingredient: [""]) { (sucess, recipe) in
             //then
-            XCTAssertFalse(success)
+            XCTAssertFalse(sucess)
             XCTAssertNil(recipe)
+            //XCTAssertEqual(FakeResponseData.responseKO?.statusCode, 500)
+            
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 30.0)
         
     }
-            
+    
 }

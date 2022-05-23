@@ -12,27 +12,27 @@ import Foundation
 import CoreData
 
 class TestCoreDataStack: CoreDataStack {
-  override init() {
-    super.init()
-
-    // 1
-    let persistentStoreDescription = NSPersistentStoreDescription()
-    persistentStoreDescription.type = NSInMemoryStoreType
-
-    // 2
-      let container = NSPersistentContainer(name: "Reciplease")
-    // 3
-    container.persistentStoreDescriptions = [persistentStoreDescription]
-
-    container.loadPersistentStores { _, error in
-      if let error = error as NSError? {
-        fatalError("Unresolved error \(error), \(error.userInfo)")
-      }
+    override init() {
+        super.init()
+        
+        
+        let persistentStoreDescription = NSPersistentStoreDescription()
+        persistentStoreDescription.type = NSInMemoryStoreType
+        
+        
+        let container = NSPersistentContainer(name: "Reciplease")
+        
+        container.persistentStoreDescriptions = [persistentStoreDescription]
+        
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        
+        
+        persistentContainer = container
     }
-
-    // 4
-    persistentContainer = container
-  }
 }
 
 

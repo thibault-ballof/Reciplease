@@ -14,15 +14,15 @@ class CoreDataTests: XCTestCase {
     var coreDataStack: CoreDataStack!
     
     override func setUp() {
-      super.setUp()
-      coreDataStack = TestCoreDataStack()
+        super.setUp()
+        coreDataStack = TestCoreDataStack()
         favoriteRecipe = FavoriteRecipes(context: coreDataStack.viewContext)
-      
+        
     }
     override func tearDown() {
-      super.tearDown()
-      favoriteRecipe = nil
-      coreDataStack = nil
+        super.tearDown()
+        favoriteRecipe = nil
+        coreDataStack = nil
     }
     func testAddingFavorite() {
         // given
@@ -51,7 +51,7 @@ class CoreDataTests: XCTestCase {
         XCTAssertEqual(favoriteRecipe.label, nil)
     }
     
-    func testAppenndElementsInFavoriteWithAlreadyExistRecipe() {
+    func testAppendElementsInFavoriteWithAlreadyExistingRecipe() {
         //given
         let recipe = Recipe(label: "String", image: "String", ingredientLines: ["String"], url: "String", totalTime: 0, yield: 0)
         favoriteRecipe.label = recipe.label
@@ -62,7 +62,7 @@ class CoreDataTests: XCTestCase {
         let predicate = NSPredicate(format: "label == %@", "String")
         request.predicate = predicate
         request.fetchLimit = 1
-    
+        
         //When
         favoriteRecipe.label = recipe.label
         favoriteRecipe.ingredientsLine = recipe.ingredientLines
