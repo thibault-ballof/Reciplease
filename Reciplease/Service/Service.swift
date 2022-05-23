@@ -9,7 +9,16 @@ import Foundation
 import Alamofire
 
 class Service {
-  
+    
+    // MARK: - Singleton
+    static var shared = Service()
+    private init() {}
+    
+    private var session = URLSession(configuration: .default)
+    init(session: URLSession) {
+        self.session = session
+    }
+
     
     func createURL(ingredient: [String]) -> URLRequest{
         var ingredientsParams: String = ""

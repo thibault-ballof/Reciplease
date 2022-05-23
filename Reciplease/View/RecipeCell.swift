@@ -37,6 +37,7 @@ class RecipeCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var yield: UILabel!
     
     
     //MARK: - Outlets Favorite Cell

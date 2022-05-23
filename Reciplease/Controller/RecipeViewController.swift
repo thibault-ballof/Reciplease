@@ -15,19 +15,21 @@ class RecipeViewController: UIViewController {
     var recipes: RecipeData = RecipeData(hits: [Hits]())
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
-    private let recipeService = Service()
+   
+     
+    
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getRecipes()
         tableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
     func getRecipes() {
-        recipeService.fetch(ingredient: ingredients) { (sucess, recipe) in
+        Service.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 self.recipes = recipe!
                 self.tableView.reloadData()       
@@ -62,6 +64,7 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.totalTimeLabel.text = "\(recipes.hits[indexPath.row].recipe.totalTime)"
         cell.label.text = recipes.hits[indexPath.row].recipe.label
+        cell.yield.text = "\(recipes.hits[indexPath.row].recipe.yield)"
         var indregientsLine: String = ""
         for i in 0 ..< recipes.hits[indexPath.row].recipe.ingredientLines.count {
             indregientsLine += recipes.hits[indexPath.row].recipe.ingredientLines[i]
@@ -95,7 +98,6 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        print("test")
         selectedRecipe = recipes.hits[indexPath.row].recipe
         performSegue(withIdentifier: "PassData", sender: self)
     }

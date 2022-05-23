@@ -54,37 +54,33 @@ class DetailRecipeViewController: UIViewController {
         let predicate = NSPredicate(format: "label == %@", name)
         request.predicate = predicate
         request.fetchLimit = 1
-
-        do{
+        
+        do {
             let count = try CoreDataStack.sharedInstance.viewContext.count(for: request)
+           
             if(count == 0){
+                
                 favoriteRecipe.label = name
                 favoriteRecipe.image = image
                 favoriteRecipe.ingredientsLine = ingredientLines
-                
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-                
                 do {
                     try CoreDataStack.sharedInstance.viewContext.save()
                 } catch {
                     print("error")
                 }
-            }
-            else{
-            // at least one matching object exists
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+            } else {
                 let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alert, animated: true)
+             
             }
-          }
+        }
         catch let error as NSError {
-             print("Could not fetch \(error), \(error.userInfo)")
-          }
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
         
     }
-    
-    
-    
 }
 
 
@@ -103,3 +99,4 @@ extension DetailRecipeViewController: UITableViewDataSource {
         return recipe.ingredientLines.count
     }
 }
+

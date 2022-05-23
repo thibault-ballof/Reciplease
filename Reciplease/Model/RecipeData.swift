@@ -22,4 +22,5 @@ struct Recipe: Codable {
     let ingredientLines: [String]
     let url: String
     let totalTime: Int
+    let yield: Int
 }

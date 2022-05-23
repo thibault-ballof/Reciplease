@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataStack {
+class CoreDataStack {
     
     // MARK: - Public
     var viewContext: NSManagedObjectContext {
@@ -21,7 +21,7 @@ final class CoreDataStack {
     
     // MARK: - Private
 
-    private init() {}
+    init() {}
     
      lazy var persistentContainer: NSPersistentContainer = {
       let container = NSPersistentContainer(name: "Reciplease")

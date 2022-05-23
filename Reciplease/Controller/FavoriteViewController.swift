@@ -23,7 +23,7 @@ class FavoriteViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
         self.fetchFavorites()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PassFavoriteData" {
             
@@ -31,8 +31,6 @@ class FavoriteViewController: UIViewController {
             FavoriteDetailRecipeVC.recipes = selectedRecipe
             
         }
-        
-        
     }
     
     @objc func refresh() {
@@ -41,10 +39,10 @@ class FavoriteViewController: UIViewController {
     
     func fetchFavorites() {
         let request: NSFetchRequest<FavoriteRecipes> = FavoriteRecipes.fetchRequest()
+        let predicate = NSPredicate(format: "label != %@", "")
+        request.predicate = predicate
         guard let recipe = try? CoreDataStack.sharedInstance.viewContext.fetch(request) else { return }
-        
         recipes = recipe
-        tableView.reloadData()
     }
 }
 
@@ -63,8 +61,6 @@ extension FavoriteViewController:  UITableViewDataSource, UITableViewDelegate {
         }
         cell.favoriteIngredientsListLabel.text = recipes[indexPath.row].ingredientsLine?.joined(separator: ",")
         cell.labelFavorite.text = recipes[indexPath.row].label
-        
-        
         
         AF.request( recipes[indexPath.row].image!,method: .get).response{ response in
             
