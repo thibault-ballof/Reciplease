@@ -24,7 +24,9 @@ class FavoriteViewController: UIViewController {
         self.fetchFavorites()
         
         if recipes.isEmpty {
-            
+            let alert = UIAlertController(title: "No Favorites", message: "You must add favorite before continuing. Touch heart to add favorite", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     
