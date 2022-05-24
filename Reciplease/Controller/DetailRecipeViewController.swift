@@ -18,13 +18,16 @@ class DetailRecipeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
-    
+    @IBOutlet weak var yieldLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         label.text = recipe.label
+        yieldLabel.text = "\(recipe.yield)"
+        timeLabel.text = "\(recipe.totalTime)"
         AF.request( recipe.image,method: .get).response { response in
             
             switch response.result {
@@ -45,10 +48,10 @@ class DetailRecipeViewController: UIViewController {
     }
     
     @IBAction func favoriteButton(_ sender: Any) {
-        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines)
+        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield)
     }
     
-    func saveFavoriteButton(name: String, image: String, ingredientLines: [String]) {
+    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int) {
         let favoriteRecipe = FavoriteRecipes(context: CoreDataStack.sharedInstance.viewContext)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipes")
         let predicate = NSPredicate(format: "label == %@", name)
@@ -63,6 +66,8 @@ class DetailRecipeViewController: UIViewController {
                 favoriteRecipe.label = name
                 favoriteRecipe.image = image
                 favoriteRecipe.ingredientsLine = ingredientLines
+                favoriteRecipe.yield = "\(yield)"
+                favoriteRecipe.time = "\(time)"
                 do {
                     try CoreDataStack.sharedInstance.viewContext.save()
                 } catch {

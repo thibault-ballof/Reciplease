@@ -14,13 +14,14 @@ class Service {
     static var shared = Service()
     private init() {}
     
+    // MARK: - Init
     private var session = URLSession(configuration: .default)
     init(session: URLSession) {
         self.session = session
     }
-
     
-    func createURL(ingredient: [String]) -> URLRequest{
+    
+    func createURL(ingredient: [String]) -> URLRequest {
         var ingredientsParams: String = ""
         for i in 0 ..< ingredient.count {
             ingredientsParams += ingredient[i]
@@ -33,7 +34,7 @@ class Service {
     }
     
     
-    func fetch(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void)  {
+    func fetch(ingredient: [String], callback: @escaping (Bool, RecipeData?) -> Void) {
         
         
         let makeUrl = createURL(ingredient: ingredient)
