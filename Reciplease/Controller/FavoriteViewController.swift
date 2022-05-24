@@ -10,7 +10,7 @@ import CoreData
 import Alamofire
 
 class FavoriteViewController: UIViewController {
-    //MARK: - Variables
+    // MARK: - Properties
     var recipes = [FavoriteRecipes]()
     var selectedRecipe = FavoriteRecipes()
     

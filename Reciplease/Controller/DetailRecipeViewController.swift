@@ -10,7 +10,7 @@ import Alamofire
 import CoreData
 
 class DetailRecipeViewController: UIViewController {
-    //MARK: - Variables
+    // MARK: - Properties
     var recipe: Recipe!
     
     //MARK: - Outlets

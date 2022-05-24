@@ -11,7 +11,7 @@ import Alamofire
 
 class RecipeViewController: UIViewController {
     
-    //MARK: - Variables
+    // MARK: - Properties
     var recipes: RecipeData = RecipeData(hits: [Hits]())
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
