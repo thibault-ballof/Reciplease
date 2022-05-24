@@ -485,6 +485,8 @@
                                         <connections>
                                             <outlet property="favoriteIngredientsListLabel" destination="hqf-DA-eFM" id="8MO-NA-AGw"/>
                                             <outlet property="favoriteRecipeImage" destination="g5v-ba-Drj" id="CNO-y0-5bd"/>
+                                            <outlet property="favoriteYield" destination="BYu-nL-jmT" id="MRh-FH-Lrh"/>
+                                            <outlet property="favoritetotalTimeLabel" destination="Gmk-z5-xzR" id="3zW-Zb-x5e"/>
                                             <outlet property="labelFavorite" destination="vRr-KF-aNO" id="KEq-OL-Twy"/>
                                         </connections>
                                     </tableViewCell>

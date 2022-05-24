@@ -43,7 +43,10 @@ class RecipeCell: UITableViewCell {
     //MARK: - Outlets Favorite Cell
     @IBOutlet weak var labelFavorite: UILabel!
     @IBOutlet weak var favoriteRecipeImage: UIImageView!
-    
     @IBOutlet weak var favoriteIngredientsListLabel: UILabel!
+    @IBOutlet weak var favoritetotalTimeLabel: UILabel!
+    @IBOutlet weak var favoriteYield: UILabel!
+    
+    
 }
 

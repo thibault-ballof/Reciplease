@@ -35,6 +35,7 @@ class FavoriteViewController: UIViewController {
     
     @objc func refresh() {
         self.fetchFavorites()
+        tableView.reloadData()
     }
     
     func fetchFavorites() {
@@ -61,17 +62,23 @@ extension FavoriteViewController:  UITableViewDataSource, UITableViewDelegate {
         }
         cell.favoriteIngredientsListLabel.text = recipes[indexPath.row].ingredientsLine?.joined(separator: ",")
         cell.labelFavorite.text = recipes[indexPath.row].label
+        cell.favoriteYield.text = recipes[indexPath.row].yield
+        cell.favoritetotalTimeLabel.text = recipes[indexPath.row].time
         
-        AF.request( recipes[indexPath.row].image!,method: .get).response{ response in
-            
-            switch response.result {
-            case .success(let responseData):
-                cell.favoriteRecipeImage.image = UIImage(data: responseData!)
+        if let image = recipes[indexPath.row].image {
+            AF.request( image,method: .get).response{ response in
                 
-            case .failure(let error):
-                print("error--->",error)
+                switch response.result {
+                case .success(let responseData):
+                    cell.favoriteRecipeImage.image = UIImage(data: responseData!)
+                    
+                case .failure(let error):
+                    print("error--->",error)
+                }
             }
         }
+        
+        
         return cell
     }
     
