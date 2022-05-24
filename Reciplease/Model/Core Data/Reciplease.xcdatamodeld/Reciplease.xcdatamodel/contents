@@ -5,9 +5,10 @@
         <attribute name="ingredientsLine" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="yield" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavoriteRecipes" positionX="-63" positionY="-17" width="128" height="118"/>
+        <element name="FavoriteRecipes" positionX="-63" positionY="-17" width="128" height="133"/>
     </elements>
 </model>

@@ -48,10 +48,10 @@ class DetailRecipeViewController: UIViewController {
     }
     
     @IBAction func favoriteButton(_ sender: Any) {
-        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield)
+        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield, url: recipe.url)
     }
     
-    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int) {
+    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String) {
         let favoriteRecipe = FavoriteRecipes(context: CoreDataStack.sharedInstance.viewContext)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipes")
         let predicate = NSPredicate(format: "label == %@", name)
@@ -68,6 +68,7 @@ class DetailRecipeViewController: UIViewController {
                 favoriteRecipe.ingredientsLine = ingredientLines
                 favoriteRecipe.yield = "\(yield)"
                 favoriteRecipe.time = "\(time)"
+                favoriteRecipe.url = url
                 do {
                     try CoreDataStack.sharedInstance.viewContext.save()
                 } catch {

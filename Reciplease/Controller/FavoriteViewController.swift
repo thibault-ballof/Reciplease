@@ -22,6 +22,10 @@ class FavoriteViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
         self.fetchFavorites()
+        
+        if recipes.isEmpty {
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

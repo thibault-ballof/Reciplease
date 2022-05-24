@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DetailFavoriteViewController: UIViewController {
     //MARK: - Variables
@@ -16,14 +17,40 @@ class DetailFavoriteViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var yieldLabel: UILabel!
+    @IBOutlet weak var image: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         countIngredientsList =  recipes.ingredientsLine!.count
+        timeLabel.text = recipes.time
+        yieldLabel.text = recipes.yield
+        label.text = recipes.label
+        
+        if let image = recipes.image {
+            AF.request( image,method: .get).response { response in
+                
+                switch response.result {
+                case .success(let responseData):
+                    self.image.image = UIImage(data: responseData!)
+                    
+                case .failure(let error):
+                    print("error--->",error)
+                }
+            }
+        }
+        
+        
         // Do any additional setup after loading the view.    
     }
     
+    @IBAction func getDirectionsButton(_ sender: Any) {
+        if let url = URL(string: recipes.url!) {
+            UIApplication.shared.open(url)
+        }
+    }
     @IBAction func removeFavoriteButton(_ sender: UIButton) {
         
             CoreDataStack.sharedInstance.viewContext.delete(recipes)
