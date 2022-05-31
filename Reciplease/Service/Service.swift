@@ -10,18 +10,19 @@ import Alamofire
 
 class Service {
     
+    
     // MARK: - Singleton
     static var shared = Service()
-    private init() {}
+    
     
     // MARK: - Init
-    private var session = URLSession(configuration: .default)
-    init(session: URLSession) {
-        self.session = session
-    }
+    private let session: SessionProtocol
+    init(session: SessionProtocol = RecipeSession()) {
+            self.session = session
+        }
     
     
-    func createURL(ingredient: [String]) -> URLRequest {
+    func createURL(ingredient: [String]) -> URL{
         var ingredientsParams: String = ""
         for i in 0 ..< ingredient.count {
             ingredientsParams += ingredient[i]
@@ -30,7 +31,7 @@ class Service {
             }
         }
         let escapedString = ingredientsParams.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        return URLRequest(url: URL(string: "https://api.edamam.com/search?q=" + escapedString + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!)
+        return  URL(string: "https://api.edamam.com/search?q=" + escapedString + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!
     }
     
     
@@ -38,9 +39,9 @@ class Service {
         
         
         let makeUrl = createURL(ingredient: ingredient)
-        let request = AF.request(makeUrl)
+       
         
-        request.response { (data) in
+        session.request(url: makeUrl) { (data) in
             
             guard data.response?.statusCode == 200 else {
                 callback(false, nil)
@@ -51,6 +52,7 @@ class Service {
                 return
             }
             guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+                
                 callback(false, nil)
                 return
             }

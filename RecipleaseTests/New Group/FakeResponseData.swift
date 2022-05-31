@@ -5,12 +5,15 @@
 //  Created by Thibault Ballof on 16/05/2022.
 //
 
-import Foundation	
+import Foundation
+@testable import Reciplease
 
 class FakeResponseData {
     
         static let responseOK = HTTPURLResponse(url: URL(string: "https://google.fr")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         static let responseKO  = HTTPURLResponse(url: URL(string: "https://google.fr")!, statusCode: 500, httpVersion: nil, headerFields: nil)
+    
+    static let fakeRecipeData = RecipeData(hits: [])
         
         class RecipeError: Error {}
         static let error = RecipeError()

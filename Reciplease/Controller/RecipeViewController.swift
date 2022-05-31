@@ -12,7 +12,7 @@ import Alamofire
 class RecipeViewController: UIViewController {
     
     // MARK: - Properties
-    var recipes: RecipeData = RecipeData(hits: [Hits]())
+    var recipes = [Hits]()
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
    
@@ -31,7 +31,8 @@ class RecipeViewController: UIViewController {
     func getRecipes() {
         Service.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
-                self.recipes = recipe!
+                guard let recipes = recipe else { return }
+                self.recipes = recipes.hits
                 self.tableView.reloadData()       
             }
         }
@@ -62,17 +63,17 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
             
         }
-        cell.totalTimeLabel.text = "\(recipes.hits[indexPath.row].recipe.totalTime)"
-        cell.label.text = recipes.hits[indexPath.row].recipe.label
-        cell.yield.text = "\(recipes.hits[indexPath.row].recipe.yield)"
+        cell.totalTimeLabel.text = "\(recipes[indexPath.row].recipe.totalTime)"
+        cell.label.text = recipes[indexPath.row].recipe.label
+        cell.yield.text = "\(recipes[indexPath.row].recipe.yield)"
         var indregientsLine: String = ""
-        for i in 0 ..< recipes.hits[indexPath.row].recipe.ingredientLines.count {
-            indregientsLine += recipes.hits[indexPath.row].recipe.ingredientLines[i]
+        for i in 0 ..< recipes[indexPath.row].recipe.ingredientLines.count {
+            indregientsLine += recipes[indexPath.row].recipe.ingredientLines[i]
             cell.indregredientsListLabel.text = indregientsLine
         }
         
         
-        AF.request( "\(recipes.hits[indexPath.row].recipe.image)",method: .get).response{ response in
+        AF.request( "\(recipes[indexPath.row].recipe.image)",method: .get).response{ response in
             
             switch response.result {
             case .success(let responseData):
@@ -91,14 +92,14 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.hits.count
+        return recipes.count
     }
     
     // Send data to DetailRecipeViewController
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        selectedRecipe = recipes.hits[indexPath.row].recipe
+        selectedRecipe = recipes[indexPath.row].recipe
         performSegue(withIdentifier: "PassData", sender: self)
     }
 }
