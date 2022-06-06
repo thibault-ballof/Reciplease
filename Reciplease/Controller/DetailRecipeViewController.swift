@@ -12,6 +12,7 @@ import CoreData
 class DetailRecipeViewController: UIViewController {
     // MARK: - Properties
     var recipe: Recipe!
+    var isActive: Bool = false
     
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
@@ -49,6 +50,14 @@ class DetailRecipeViewController: UIViewController {
     
     @IBAction func favoriteButton(_ sender: Any) {
         saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield, url: recipe.url)
+        if isActive {
+            isActive = false
+            favoriteButton.setImage(UIImage(systemName: "hearth"), for: .normal)
+            
+        } else {
+            isActive = true
+            favoriteButton.setImage(UIImage(systemName: "hearth.fill"), for: .normal)
+        }
     }
     
     func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String) {

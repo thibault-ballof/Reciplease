@@ -15,11 +15,6 @@ class Service {
     static var shared = Service()
     
     
-    // MARK: - Init
-    private let session: SessionProtocol
-    init(session: SessionProtocol = RecipeSession()) {
-            self.session = session
-        }
     
     
     func createURL(ingredient: [String]) -> URL{
@@ -39,9 +34,9 @@ class Service {
         
         
         let makeUrl = createURL(ingredient: ingredient)
-       
+        let request = AF.request(makeUrl)
         
-        session.request(url: makeUrl) { (data) in
+        request.response { (data) in
             
             guard data.response?.statusCode == 200 else {
                 callback(false, nil)
@@ -52,12 +47,13 @@ class Service {
                 return
             }
             guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: data) else {
-                
                 callback(false, nil)
                 return
             }
             
             callback(true, responseJSON)
+            
+            
             
         }
         
