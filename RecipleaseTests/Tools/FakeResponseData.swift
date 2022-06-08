@@ -9,26 +9,33 @@ import Foundation
 @testable import Reciplease
 
 class FakeResponseData {
-    
-    static let responseOK = HTTPURLResponse(url: URL(string: "https://google.fr")!, statusCode: 200, httpVersion: nil, headerFields: nil)
-    static let responseKO  = HTTPURLResponse(url: URL(string: "https://google.fr")!, statusCode: 500, httpVersion: nil, headerFields: nil)
-    
-    
-    class RecipeError: Error {}
-    static let error = RecipeError()
-    
-    static var correctData: Data {
+    //MARK: - Data
+    static var recipeData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "Recipe", withExtension: "json")
-        let data = try! Data(contentsOf: url!)
-        return data
+        let url = bundle.url(forResource: "Recipe", withExtension: ".json")!
+        return try! Data(contentsOf: url)
     }
     
-    static var incorrectData: Data {
+    static var noRecipeData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "BadRecipe", withExtension: "json")
-        let data = try! Data(contentsOf: url!)
-        return data
+        let url = bundle.url(forResource: "BadRecipe", withExtension: ".json")!
+        return try! Data(contentsOf: url)
     }
-    static let noData = "error".data(using: .utf8)!
+    
+    static var imageData: Data? {
+        let bundle = Bundle.main
+        let url = bundle.url(forResource: "image", withExtension: ".png")!
+        return try! Data(contentsOf: url)
+    }
+    
+    static let incorrectData = "erreur".data(using: .utf8)
+    
+    //MARK: - Response
+    static let responseOK = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])!
+    
+    static let responseKO = HTTPURLResponse(url: URL(string: "https://openclassrooms.com")!, statusCode: 500, httpVersion: nil, headerFields: [:])!
+    
+    //MARK: - Error
+    class FakeError: Error {}
+    static let error = FakeError()
 }

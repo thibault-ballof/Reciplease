@@ -8,16 +8,20 @@
 import Foundation
 import Alamofire
 
-class Service {
+class RecipeService {
     
-    
+  
     // MARK: - Singleton
-    static var shared = Service()
+   static var shared = RecipeService()
+    private init() {}
     
     
-    
-    
-    func createURL(ingredient: [String]) -> URL{
+    private var session = Session(configuration: .default)
+   init(session: Session) {
+       self.session = session
+   }
+  
+ private func createURL(ingredient: [String]) -> URL{
         var ingredientsParams: String = ""
         for i in 0 ..< ingredient.count {
             ingredientsParams += ingredient[i]
@@ -34,7 +38,7 @@ class Service {
         
         
         let makeUrl = createURL(ingredient: ingredient)
-        let request = AF.request(makeUrl)
+        let request = session.request(makeUrl)
         
         request.response { (data) in
             

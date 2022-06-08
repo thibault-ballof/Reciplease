@@ -16,6 +16,7 @@ class RecipeViewController: UIViewController {
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
    
+   
      
     
     //MARK: - Outlets
@@ -29,7 +30,7 @@ class RecipeViewController: UIViewController {
     }
     
     func getRecipes() {
-        Service.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
+        RecipeService.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 guard let recipes = recipe else { return }
                 self.recipes = recipes.hits

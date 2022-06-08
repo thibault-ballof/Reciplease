@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class DetailFavoriteViewController: UIViewController {
-    //MARK: - Variables
+    // MARK: - Properties
     var recipes = FavoriteRecipes()
     var countIngredientsList = 0
     var isFavorite = true
