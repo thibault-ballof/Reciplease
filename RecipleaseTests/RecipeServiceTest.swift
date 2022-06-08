@@ -116,5 +116,57 @@ class ServiceTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 10)
+        
+    
     }
+    
+    func testFetchRecipesShouldGetCorrectData() {
+        // Given
+        MockURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.recipeData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        recipeService.fetch(ingredient: ["chicken"]) { success, recipes in
+            // Then
+            XCTAssertTrue(success)
+            XCTAssertNotNil(recipes)
+            XCTAssertEqual(recipes?.hits[0].recipe.label, "Chicken Vesuvio")
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
+        
+    func testFetchRecipesShouldGetFalseData() {
+            // Given
+            MockURLProtocol.loadingHandler = { request in
+                let data: Data? = FakeResponseData.noRecipeData
+                let response: HTTPURLResponse = FakeResponseData.responseOK
+                let error: Error? = nil
+                return (response, data, error)
+            }
+            
+            // When
+            let expectation = XCTestExpectation(description: "Wait for queue change.")
+            recipeService.fetch(ingredient: ["chicken"]) { success, recipes in
+                // Then
+                XCTAssertFalse(success)
+                XCTAssertNil(recipes)
+                XCTAssertNotEqual(recipes?.hits[0].recipe.label, "Chicken Vesuvio")
+                
+                expectation.fulfill()
+            }
+            
+            wait(for: [expectation], timeout: 10)
+            
+        
+        }
+   
 }
