@@ -222,4 +222,29 @@ class ServiceTest: XCTestCase {
         
         wait(for: [expectation], timeout: 10)
     }
+    
+    // MARK: -  TEST CREATE URL
+    func testCreateURLShouldBeCorrectWithIngredient() {
+        //Given
+        let recipeURL =  RecipeService.shared.createURL(ingredient: ["chicken"])
+        
+    XCTAssertEqual("https://api.edamam.com/search?q=chicken&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        
+    }
+    
+    func testCreateURLShouldBeCorrectWithMultipleIngredient() {
+        //Given
+        let recipeURL =  RecipeService.shared.createURL(ingredient: ["chicken","tomato"])
+        
+    XCTAssertEqual("https://api.edamam.com/search?q=chicken,tomato&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        
+    }
+    
+    func testCreateURLShouldBeIncorrectWithNoIngredient() {
+        //Given
+        let recipeURL =  RecipeService.shared.createURL(ingredient: [])
+        
+    XCTAssertEqual("https://api.edamam.com/search?q=&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        
+    }
 }

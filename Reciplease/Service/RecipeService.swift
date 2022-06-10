@@ -22,7 +22,7 @@ class RecipeService {
        self.session = session
    }
   
- private func createURL(ingredient: [String]) -> URL{
+ func createURL(ingredient: [String]) -> URL{
         var ingredientsParams: String = ""
         for i in 0 ..< ingredient.count {
             ingredientsParams += ingredient[i]
@@ -31,6 +31,7 @@ class RecipeService {
             }
         }
         let escapedString = ingredientsParams.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+     
         return  URL(string: "https://api.edamam.com/search?q=" + escapedString + "&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253")!
     }
     
@@ -79,6 +80,8 @@ class RecipeService {
         }
 
     }
+    
+   
     
 }
 
