@@ -74,7 +74,7 @@ class RecipeService {
                 
             case .failure(let error):
                 print("error--->",error)
-                image.image = UIImage(named: "noimage")
+                image.image = UIImage(named: "image")
             }
         }
 

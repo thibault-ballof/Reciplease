@@ -7,6 +7,7 @@
 
 import XCTest
 import Alamofire
+import UIKit
 @testable import Reciplease
 
 class ServiceTest: XCTestCase {
@@ -168,5 +169,57 @@ class ServiceTest: XCTestCase {
             
         
         }
+    
+    
+    // MARK: - Test fetchImg
+    
+    func testFetchImageShouldGetCorrectData() {
+        // Given
+        MockURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.imageData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+            
+        }
+        let image = UIImageView()
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        recipeService.fecthImg(url: "", image: image)
+        
+            
+        XCTAssertNotNil(image)
+        
+            
+            expectation.fulfill()
+        
+        
+        wait(for: [expectation], timeout: 10)
+    }
    
+    func testFetchImageShouldGetDefaultImage() {
+        // Given
+        MockURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.incorrectData
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = Alamofire.AFError.invalidURL(url: "badurl")
+            return (response, data, error)
+            
+        }
+        let image = UIImageView()
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        recipeService.fecthImg(url: "", image: image)
+        if let img = image.image {
+            XCTAssertNotNil(img)
+            XCTAssertEqual(img.pngData(), UIImage(named: "image")?.pngData())
+        }
+            
+       
+            
+            expectation.fulfill()
+        
+        
+        wait(for: [expectation], timeout: 10)
+    }
 }
