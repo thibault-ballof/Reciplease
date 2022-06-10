@@ -73,8 +73,9 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.indregredientsListLabel.text = indregientsLine
         }
         
+        RecipeService.shared.fecthImg(url: "\(recipes[indexPath.row].recipe.image)", image: cell.recipeImage)
         
-        AF.request( "\(recipes[indexPath.row].recipe.image)",method: .get).response{ response in
+        /*AF.request( "\(recipes[indexPath.row].recipe.image)",method: .get).response{ response in
             
             switch response.result {
             case .success(let responseData):
@@ -83,7 +84,7 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
             case .failure(let error):
                 print("error--->",error)
             }
-        }
+        }*/
         
         return cell
     }

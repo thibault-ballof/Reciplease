@@ -29,7 +29,9 @@ class DetailRecipeViewController: UIViewController {
         label.text = recipe.label
         yieldLabel.text = "\(recipe.yield)"
         timeLabel.text = "\(recipe.totalTime)"
-        AF.request( recipe.image,method: .get).response { response in
+        
+        RecipeService.shared.fecthImg(url: recipe.image, image: self.recipeImage)
+       /* AF.request( recipe.image,method: .get).response { response in
             
             switch response.result {
             case .success(let responseData):
@@ -38,7 +40,7 @@ class DetailRecipeViewController: UIViewController {
             case .failure(let error):
                 print("error--->",error)
             }
-        }
+        }*/
         // Do any additional setup after loading the view.
     }
     

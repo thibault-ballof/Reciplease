@@ -147,7 +147,7 @@ class ServiceTest: XCTestCase {
     func testFetchRecipesShouldGetFalseData() {
             // Given
             MockURLProtocol.loadingHandler = { request in
-                let data: Data? = FakeResponseData.noRecipeData
+                let data: Data? = nil
                 let response: HTTPURLResponse = FakeResponseData.responseOK
                 let error: Error? = nil
                 return (response, data, error)

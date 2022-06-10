@@ -28,8 +28,11 @@ class DetailFavoriteViewController: UIViewController {
         timeLabel.text = recipes.time
         yieldLabel.text = recipes.yield
         label.text = recipes.label
-        
         if let image = recipes.image {
+        RecipeService.shared.fecthImg(url: image, image: self.image)
+        }
+        
+        /*if let image = recipes.image {
             AF.request( image,method: .get).response { response in
                 
                 switch response.result {
@@ -40,7 +43,7 @@ class DetailFavoriteViewController: UIViewController {
                     print("error--->",error)
                 }
             }
-        }
+        }*/
         
         
         // Do any additional setup after loading the view.    

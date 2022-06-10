@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 class RecipeService {
     
@@ -61,6 +62,22 @@ class RecipeService {
             
         }
         
+    }
+    
+    func fecthImg(url : String, image: UIImageView) {
+        session.request( url,method: .get).response { response in
+            
+            switch response.result {
+            case .success(let responseData):
+                
+                image.image = UIImage(data: responseData!)
+                
+            case .failure(let error):
+                print("error--->",error)
+                image.image = UIImage(named: "noimage")
+            }
+        }
+
     }
     
 }
