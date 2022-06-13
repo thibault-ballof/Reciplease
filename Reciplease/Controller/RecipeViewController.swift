@@ -15,9 +15,9 @@ class RecipeViewController: UIViewController {
     var recipes = [Hits]()
     var ingredients: [String] = []
     var selectedRecipe: Recipe!
-   
-   
-     
+    
+    
+    
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -74,17 +74,6 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         RecipeService.shared.fecthImg(url: "\(recipes[indexPath.row].recipe.image)", image: cell.recipeImage)
-        
-        /*AF.request( "\(recipes[indexPath.row].recipe.image)",method: .get).response{ response in
-            
-            switch response.result {
-            case .success(let responseData):
-                cell.recipeImage.image = UIImage(data: responseData!)
-                
-            case .failure(let error):
-                print("error--->",error)
-            }
-        }*/
         
         return cell
     }

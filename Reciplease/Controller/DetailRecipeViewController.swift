@@ -17,11 +17,12 @@ class DetailRecipeViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var yieldLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var NavigationBar: UINavigationItem!
     
+    @IBOutlet weak var buttonFavorite: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +32,6 @@ class DetailRecipeViewController: UIViewController {
         timeLabel.text = "\(recipe.totalTime)"
         
         RecipeService.shared.fecthImg(url: recipe.image, image: self.recipeImage)
-       /* AF.request( recipe.image,method: .get).response { response in
-            
-            switch response.result {
-            case .success(let responseData):
-                self.recipeImage.image = UIImage(data: responseData!)
-                
-            case .failure(let error):
-                print("error--->",error)
-            }
-        }*/
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func getDirection(_ sender: Any) {
@@ -50,19 +40,12 @@ class DetailRecipeViewController: UIViewController {
         }
     }
     
+    
     @IBAction func favoriteButton(_ sender: Any) {
-        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield, url: recipe.url)
-        if isActive {
-            isActive = false
-            favoriteButton.setImage(UIImage(systemName: "hearth"), for: .normal)
-            
-        } else {
-            isActive = true
-            favoriteButton.setImage(UIImage(systemName: "hearth.fill"), for: .normal)
-        }
+        saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield, url: recipe.url, button: buttonFavorite)
     }
     
-    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String) {
+    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String, button: UIBarButtonItem) {
         let favoriteRecipe = FavoriteRecipes(context: CoreDataStack.sharedInstance.viewContext)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipes")
         let predicate = NSPredicate(format: "label == %@", name)
@@ -71,8 +54,9 @@ class DetailRecipeViewController: UIViewController {
         
         do {
             let count = try CoreDataStack.sharedInstance.viewContext.count(for: request)
-           
+            
             if(count == 0){
+                
                 
                 favoriteRecipe.label = name
                 favoriteRecipe.image = image
@@ -87,10 +71,11 @@ class DetailRecipeViewController: UIViewController {
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
+                button.tintColor = .none
                 let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alert, animated: true)
-             
+                
             }
         }
         catch let error as NSError {

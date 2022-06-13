@@ -29,24 +29,9 @@ class DetailFavoriteViewController: UIViewController {
         yieldLabel.text = recipes.yield
         label.text = recipes.label
         if let image = recipes.image {
-        RecipeService.shared.fecthImg(url: image, image: self.image)
+            RecipeService.shared.fecthImg(url: image, image: self.image)
         }
         
-        /*if let image = recipes.image {
-            AF.request( image,method: .get).response { response in
-                
-                switch response.result {
-                case .success(let responseData):
-                    self.image.image = UIImage(data: responseData!)
-                    
-                case .failure(let error):
-                    print("error--->",error)
-                }
-            }
-        }*/
-        
-        
-        // Do any additional setup after loading the view.    
     }
     
     @IBAction func getDirectionsButton(_ sender: Any) {
@@ -56,9 +41,9 @@ class DetailFavoriteViewController: UIViewController {
     }
     @IBAction func removeFavoriteButton(_ sender: UIButton) {
         
-            CoreDataStack.sharedInstance.viewContext.delete(recipes)
-            try? CoreDataStack.sharedInstance.viewContext.save()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+        CoreDataStack.sharedInstance.viewContext.delete(recipes)
+        try? CoreDataStack.sharedInstance.viewContext.save()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
     }
     
 }

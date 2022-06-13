@@ -71,18 +71,6 @@ extension FavoriteViewController:  UITableViewDataSource, UITableViewDelegate {
         cell.favoriteYield.text = recipes[indexPath.row].yield
         cell.favoritetotalTimeLabel.text = recipes[indexPath.row].time
         
-        /*if let image = recipes[indexPath.row].image {
-            AF.request( image,method: .get).response{ response in
-                
-                switch response.result {
-                case .success(let responseData):
-                    cell.favoriteRecipeImage.image = UIImage(data: responseData!)
-                    
-                case .failure(let error):
-                    print("error--->",error)
-                }
-            }
-        }*/
         RecipeService.shared.fecthImg(url: "\(recipes[indexPath.row].image ?? "")", image: cell.favoriteRecipeImage)
         
         

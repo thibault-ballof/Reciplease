@@ -20,16 +20,16 @@ class CoreDataStack {
     static let sharedInstance = CoreDataStack()
     
     // MARK: - Private
-
+    
     init() {}
     
-     lazy var persistentContainer: NSPersistentContainer = {
-      let container = NSPersistentContainer(name: "Reciplease")
-      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-        if let error = error as NSError? {
-          fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-      })
-      return container
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Reciplease")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
     }()
 }

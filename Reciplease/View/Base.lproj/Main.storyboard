@@ -369,7 +369,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoriteButton" destination="XAk-YG-4gf" id="Iut-tB-7rO"/>
+                        <outlet property="NavigationBar" destination="z9y-al-Ie4" id="qfD-fb-cQa"/>
+                        <outlet property="buttonFavorite" destination="Yjg-3e-RDI" id="0ja-lE-VFd"/>
                         <outlet property="label" destination="Yv0-XC-1uo" id="cQm-fL-Wv3"/>
                         <outlet property="recipeImage" destination="Ml3-p5-kdD" id="EMl-yb-1v7"/>
                         <outlet property="tableView" destination="xK4-8m-0lh" id="r7g-Md-mWC"/>

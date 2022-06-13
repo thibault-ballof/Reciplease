@@ -11,7 +11,7 @@ import CoreData
 
 class CoreDataTests: XCTestCase {
     var favoriteRecipe: FavoriteRecipes!
-    var coreDataStack: CoreDataStack!
+    var coreDataStack: TestCoreDataStack!
     
     override func setUp() {
         super.setUp()
@@ -35,6 +35,9 @@ class CoreDataTests: XCTestCase {
         XCTAssertEqual(favoriteRecipe.label, "test")
         XCTAssertEqual(favoriteRecipe.ingredientsLine, [""])
         XCTAssertEqual(favoriteRecipe.image, "http://google.fr")
+        
+        coreDataStack.viewContext.delete(favoriteRecipe)
+        try! coreDataStack.viewContext.save()
     }
     
     func testRemoveFavorite() {
@@ -72,5 +75,8 @@ class CoreDataTests: XCTestCase {
         //then
         XCTAssertEqual(count, 1)
         
+        
+        coreDataStack.viewContext.delete(favoriteRecipe)
+        try! coreDataStack.viewContext.save()
     }
 }
