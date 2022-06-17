@@ -42,17 +42,14 @@ class RecipeService {
         let makeUrl = createURL(ingredient: ingredient)
         let request = session.request(makeUrl)
         
-        request.response { (data) in
+        request.response { (receivedData) in
             
-            guard data.response?.statusCode == 200 else {
+            guard receivedData.response?.statusCode == 200 else {
                 callback(false, nil)
                 return
             }
-            guard  let data = data.data else {
-                callback(false, nil)
-                return
-            }
-            guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: data) else {
+           
+            guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: receivedData.data!) else {
                 callback(false, nil)
                 return
             }
@@ -84,4 +81,3 @@ class RecipeService {
     
     
 }
-

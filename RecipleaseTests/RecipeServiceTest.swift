@@ -46,7 +46,7 @@ class ServiceTest: XCTestCase {
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(recipes)
-           
+            
             expectation.fulfill()
         }
         
@@ -68,7 +68,7 @@ class ServiceTest: XCTestCase {
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(recipes)
-           
+            
             expectation.fulfill()
         }
         
@@ -118,7 +118,7 @@ class ServiceTest: XCTestCase {
         
         wait(for: [expectation], timeout: 10)
         
-    
+        
     }
     
     func testFetchRecipesShouldGetCorrectData() {
@@ -144,31 +144,31 @@ class ServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 10)
     }
     
-        
+    
     func testFetchRecipesShouldGetFalseData() {
-            // Given
-            MockURLProtocol.loadingHandler = { request in
-                let data: Data? = nil
-                let response: HTTPURLResponse = FakeResponseData.responseOK
-                let error: Error? = nil
-                return (response, data, error)
-            }
-            
-            // When
-            let expectation = XCTestExpectation(description: "Wait for queue change.")
-            recipeService.fetch(ingredient: ["chicken"]) { success, recipes in
-                // Then
-                XCTAssertFalse(success)
-                XCTAssertNil(recipes)
-                XCTAssertNotEqual(recipes?.hits[0].recipe.label, "Chicken Vesuvio")
-                
-                expectation.fulfill()
-            }
-            
-            wait(for: [expectation], timeout: 10)
-            
-        
+        // Given
+        MockURLProtocol.loadingHandler = { request in
+            let data: Data! = nil
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
         }
+        
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        recipeService.fetch(ingredient: ["chicken"]) { success, recipes in
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(recipes)
+            XCTAssertNotEqual(recipes?.hits[0].recipe.label, "Chicken Vesuvio")
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 10)
+        
+        
+    }
     
     
     // MARK: - Test fetchImg
@@ -187,16 +187,16 @@ class ServiceTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         recipeService.fecthImg(url: "", image: image)
         
-            
+        
         XCTAssertNotNil(image)
         
-            
-            expectation.fulfill()
+        
+        expectation.fulfill()
         
         
         wait(for: [expectation], timeout: 10)
     }
-   
+    
     func testFetchImageShouldGetDefaultImage() {
         // Given
         MockURLProtocol.loadingHandler = { request in
@@ -214,10 +214,10 @@ class ServiceTest: XCTestCase {
             XCTAssertNotNil(img)
             XCTAssertEqual(img.pngData(), UIImage(named: "image")?.pngData())
         }
-            
-       
-            
-            expectation.fulfill()
+        
+        
+        
+        expectation.fulfill()
         
         
         wait(for: [expectation], timeout: 10)
@@ -228,7 +228,7 @@ class ServiceTest: XCTestCase {
         //Given
         let recipeURL =  RecipeService.shared.createURL(ingredient: ["chicken"])
         
-    XCTAssertEqual("https://api.edamam.com/search?q=chicken&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        XCTAssertEqual("https://api.edamam.com/search?q=chicken&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
         
     }
     
@@ -236,7 +236,7 @@ class ServiceTest: XCTestCase {
         //Given
         let recipeURL =  RecipeService.shared.createURL(ingredient: ["chicken","tomato"])
         
-    XCTAssertEqual("https://api.edamam.com/search?q=chicken,tomato&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        XCTAssertEqual("https://api.edamam.com/search?q=chicken,tomato&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
         
     }
     
@@ -244,7 +244,7 @@ class ServiceTest: XCTestCase {
         //Given
         let recipeURL =  RecipeService.shared.createURL(ingredient: [])
         
-    XCTAssertEqual("https://api.edamam.com/search?q=&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
+        XCTAssertEqual("https://api.edamam.com/search?q=&app_id=1dc84b29&app_key=fc27995dc80de75197992b58c55f8253", "\(recipeURL)")
         
     }
 }
