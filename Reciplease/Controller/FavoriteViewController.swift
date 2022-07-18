@@ -11,8 +11,8 @@ import Alamofire
 
 class FavoriteViewController: UIViewController {
     // MARK: - Properties
-    var recipes = [FavoriteRecipes]()
-    var selectedRecipe = FavoriteRecipes()
+    private var recipes = [FavoriteRecipes]()
+    private  var selectedRecipe = FavoriteRecipes()
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +44,7 @@ class FavoriteViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func fetchFavorites() {
+    private func fetchFavorites() {
         let request: NSFetchRequest<FavoriteRecipes> = FavoriteRecipes.fetchRequest()
         let predicate = NSPredicate(format: "label != %@", "")
         request.predicate = predicate

@@ -12,7 +12,7 @@ import CoreData
 class DetailRecipeViewController: UIViewController {
     // MARK: - Properties
     var recipe: Recipe!
-    var isActive: Bool = false
+    private var isActive: Bool = false
     
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!
@@ -30,7 +30,7 @@ class DetailRecipeViewController: UIViewController {
         label.text = recipe.label
         yieldLabel.text = "\(recipe.yield)"
         timeLabel.text = "\(recipe.totalTime)"
-      
+        
         RecipeService.shared.fecthImg(url: recipe.image, image: self.recipeImage)
     }
     
@@ -45,7 +45,7 @@ class DetailRecipeViewController: UIViewController {
         saveFavoriteButton(name: recipe.label, image: recipe.image, ingredientLines: recipe.ingredientLines, time: recipe.totalTime, yield: recipe.yield, url: recipe.url, button: buttonFavorite)
     }
     
-    func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String, button: UIBarButtonItem) {
+    private func saveFavoriteButton(name: String, image: String, ingredientLines: [String], time: Int, yield: Int, url: String, button: UIBarButtonItem) {
         let favoriteRecipe = FavoriteRecipes(context: CoreDataStack.sharedInstance.viewContext)
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipes")
         let predicate = NSPredicate(format: "label == %@", name)
@@ -81,7 +81,7 @@ class DetailRecipeViewController: UIViewController {
         }
         
     }
-
+    
     private func showAlertAlreadyFavorite() {
         let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

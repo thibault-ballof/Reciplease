@@ -60,13 +60,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         }
 
     }
-    func showAlertNoIngredient() {
+  private func showAlertNoIngredient() {
         let alert = UIAlertController(title: "Missing ingredients", message: "You must add ingredients before continuing.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
 
-    func showAlert() {
+   private func showAlert() {
         let alert = UIAlertController(title: "No internet", message: "You must have internet to use your app", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in

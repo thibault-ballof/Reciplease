@@ -12,9 +12,9 @@ import Alamofire
 class RecipeViewController: UIViewController {
     
     // MARK: - Properties
-    var recipes = [Hits]()
+    private var recipes = [Hits]()
     var ingredients: [String] = []
-    var selectedRecipe: Recipe!
+    private var selectedRecipe: Recipe!
     
     
     
@@ -26,13 +26,11 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
         getRecipes()
         tableView.reloadData()
-
-
+        
+        
     }
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
-    func getRecipes() {
+    
+    private func getRecipes() {
         RecipeService.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 guard let recipes = recipe else { return }
@@ -55,14 +53,14 @@ class RecipeViewController: UIViewController {
         
         
     }
-
+    
     private func showAlertNoRecipes() {
         let alert = UIAlertController(title: "No recipes found", message: "We have no results with these ingredients", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-
-
+    
+    
 }
 
 extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {

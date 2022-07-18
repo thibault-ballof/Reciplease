@@ -11,8 +11,8 @@ import Alamofire
 class DetailFavoriteViewController: UIViewController {
     // MARK: - Properties
     var recipes = FavoriteRecipes()
-    var countIngredientsList = 0
-    var isFavorite = true
+    private var countIngredientsList = 0
+    private var isFavorite = true
     
     //MARK: - Outlets
     @IBOutlet weak var label: UILabel!

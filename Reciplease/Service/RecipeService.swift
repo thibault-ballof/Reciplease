@@ -48,7 +48,7 @@ class RecipeService {
                 callback(false, nil)
                 return
             }
-           
+            
             guard let responseJSON = try? JSONDecoder().decode(RecipeData.self, from: receivedData.data!) else {
                 callback(false, nil)
                 return
