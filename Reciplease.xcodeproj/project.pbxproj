@@ -29,6 +29,7 @@
 		63A0F50328019C43005A2D66 /* DetailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A0F50228019C43005A2D66 /* DetailRecipeViewController.swift */; };
 		63B3BF4C27FAE1510032DAC1 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B3BF4B27FAE1510032DAC1 /* RecipeCell.swift */; };
 		63B3BF4F27FAEB3D0032DAC1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63B3BF4E27FAEB3D0032DAC1 /* Alamofire */; };
+		63BC2D3928854C44005B11F4 /* CheckConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC2D3828854C44005B11F4 /* CheckConnection.swift */; };
 		63C31EC4284E6E790083AD8B /* BadRecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 63C31EC3284E6E790083AD8B /* BadRecipe.json */; };
 		63C31EC6284E7A2B0083AD8B /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C31EC5284E7A2B0083AD8B /* FakeResponseData.swift */; };
 		63C31ECA284FA64A0083AD8B /* RecipeServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C31EC9284FA64A0083AD8B /* RecipeServiceTest.swift */; };
@@ -71,6 +72,7 @@
 		63A0F500280191F6005A2D66 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		63A0F50228019C43005A2D66 /* DetailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeViewController.swift; sourceTree = "<group>"; };
 		63B3BF4B27FAE1510032DAC1 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		63BC2D3828854C44005B11F4 /* CheckConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckConnection.swift; sourceTree = "<group>"; };
 		63C31EC3284E6E790083AD8B /* BadRecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BadRecipe.json; sourceTree = "<group>"; };
 		63C31EC5284E7A2B0083AD8B /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		63C31EC9284FA64A0083AD8B /* RecipeServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTest.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				63A0F4FD28018CFB005A2D66 /* Core Data */,
 				63EFC16227E8E62100ECB49C /* RecipeData.swift */,
 				632EE6B927EB70AE009FF0B4 /* Recipe.swift */,
+				63BC2D3828854C44005B11F4 /* CheckConnection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				633C1F1027E884640047BFDA /* AppDelegate.swift in Sources */,
 				63A0F50328019C43005A2D66 /* DetailRecipeViewController.swift in Sources */,
 				63B3BF4C27FAE1510032DAC1 /* RecipeCell.swift in Sources */,
+				63BC2D3928854C44005B11F4 /* CheckConnection.swift in Sources */,
 				63A0F501280191F6005A2D66 /* CoreDataStack.swift in Sources */,
 				633C1F1227E884640047BFDA /* SceneDelegate.swift in Sources */,
 				635F3D7727E8CB4D001439B0 /* FavoriteViewController.swift in Sources */,

@@ -26,7 +26,7 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
         getRecipes()
         tableView.reloadData()
-        // Do any additional setup after loading the view.
+
     }
     
     func getRecipes() {
@@ -49,7 +49,9 @@ class RecipeViewController: UIViewController {
         
         
     }
-    
+
+ 
+
 }
 
 extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {

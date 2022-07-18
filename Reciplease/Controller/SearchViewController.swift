@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     var ingredients: [String] = []
     
@@ -21,9 +21,13 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
+        ingredientTextField.delegate = self
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+
     @IBAction func addButton(_ sender: Any) {
         if let ingredientTextField = ingredientTextField.text {
             ingredients.append(ingredientTextField)
@@ -40,13 +44,41 @@ class SearchViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
         if ingredients == [] {
             let alert = UIAlertController(title: "Missing ingredients", message: "You must add ingredients before continuing.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-        guard let RecipeVC = segue.destination as? RecipeViewController else { return }
-        RecipeVC.ingredients = ingredients
+        if InternetConnectionManager.isConnectedToNetwork(){
+            print("Connected")
+            guard let RecipeVC = segue.destination as? RecipeViewController else { return }
+            RecipeVC.ingredients = ingredients
+        }else{
+            showAlert()
+        }
+
+    }
+
+    func showAlert() {
+        let alert = UIAlertController(title: "No internet", message: "You must have internet to use your app", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        }))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == textField{
+            let allowingChars = "[a-zA-Z\\s]+"
+            let letterOnly = NSCharacterSet.init(charactersIn: allowingChars).inverted
+            let validString = string.rangeOfCharacter(from: letterOnly) == nil
+            return validString
+        }
+        return true
     }
 }
 
