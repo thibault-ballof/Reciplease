@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
-    var ingredients: [String] = []
+    private var ingredients: [String] = []
     
     //MARK: -Outlets
     @IBOutlet weak var ingredientTextField: UITextField!
@@ -30,6 +30,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func addButton(_ sender: Any) {
         if let ingredientTextField = ingredientTextField.text {
+            if ingredientTextField == "" {
+                showAlertNoIngredient()
+            }
             ingredients.append(ingredientTextField)
             tableView.reloadData()
         }
@@ -46,9 +49,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if ingredients == [] {
-            let alert = UIAlertController(title: "Missing ingredients", message: "You must add ingredients before continuing.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            showAlertNoIngredient()
         }
         if InternetConnectionManager.isConnectedToNetwork(){
             print("Connected")
@@ -58,6 +59,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             showAlert()
         }
 
+    }
+    func showAlertNoIngredient() {
+        let alert = UIAlertController(title: "Missing ingredients", message: "You must add ingredients before continuing.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 
     func showAlert() {
@@ -73,7 +79,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == textField{
-            let allowingChars = "[a-zA-Z\\s]+"
+            let allowingChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ "
             let letterOnly = NSCharacterSet.init(charactersIn: allowingChars).inverted
             let validString = string.rangeOfCharacter(from: letterOnly) == nil
             return validString

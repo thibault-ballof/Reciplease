@@ -30,7 +30,7 @@ class DetailRecipeViewController: UIViewController {
         label.text = recipe.label
         yieldLabel.text = "\(recipe.yield)"
         timeLabel.text = "\(recipe.totalTime)"
-        
+      
         RecipeService.shared.fecthImg(url: recipe.image, image: self.recipeImage)
     }
     
@@ -72,9 +72,7 @@ class DetailRecipeViewController: UIViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
                 button.tintColor = .none
-                let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                showAlertAlreadyFavorite()
                 
             }
         }
@@ -83,6 +81,13 @@ class DetailRecipeViewController: UIViewController {
         }
         
     }
+
+    private func showAlertAlreadyFavorite() {
+        let alert = UIAlertController(title: "Already in favorite", message: "The recipe is already in your favorites", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
 }
 
 

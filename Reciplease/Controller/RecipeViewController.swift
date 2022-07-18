@@ -27,12 +27,18 @@ class RecipeViewController: UIViewController {
         getRecipes()
         tableView.reloadData()
 
+
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
     func getRecipes() {
         RecipeService.shared.fetch(ingredient: ingredients) { (sucess, recipe) in
             if sucess {
                 guard let recipes = recipe else { return }
+                if recipes.hits.count == 0 {
+                    self.showAlertNoRecipes()
+                }
                 self.recipes = recipes.hits
                 self.tableView.reloadData()       
             }
@@ -50,7 +56,12 @@ class RecipeViewController: UIViewController {
         
     }
 
- 
+    private func showAlertNoRecipes() {
+        let alert = UIAlertController(title: "No recipes found", message: "We have no results with these ingredients", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
 
 }
 
