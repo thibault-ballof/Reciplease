@@ -16,13 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="appstore" translatesAutoresizingMaskIntoConstraints="NO" id="Sc4-1L-ITL">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="appstore.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sc4-1L-ITL">
                                 <rect key="frame" x="80" y="300" width="254" height="296"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="254" id="KMS-4i-9oy"/>
+                                    <constraint firstAttribute="width" secondItem="Sc4-1L-ITL" secondAttribute="height" multiplier="127:148" id="VU4-ZP-zBd"/>
+                                    <constraint firstAttribute="height" constant="296" id="bv1-rV-7Ls"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Sc4-1L-ITL" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="6dW-sV-e3b"/>
+                            <constraint firstItem="Sc4-1L-ITL" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="GF7-Ff-wTg"/>
+                            <constraint firstItem="Sc4-1L-ITL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LVZ-UC-aGQ"/>
+                            <constraint firstItem="Sc4-1L-ITL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Z6v-wz-s5x"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -31,7 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="appstore" width="1024" height="1024"/>
+        <image name="appstore.png" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

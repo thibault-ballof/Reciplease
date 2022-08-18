@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6326A09C28084B48008D68A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6326A09B28084B48008D68A8 /* Assets.xcassets */; };
+		6314EF94288E9D77000E4DC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6314EF92288E9D77000E4DC0 /* Assets.xcassets */; };
+		6314EF95288E9D77000E4DC0 /* appstore.png in Resources */ = {isa = PBXBuildFile; fileRef = 6314EF93288E9D77000E4DC0 /* appstore.png */; };
 		632EE6BA27EB70AE009FF0B4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632EE6B927EB70AE009FF0B4 /* Recipe.swift */; };
 		632FEB3D28323E2D005A1FC0 /* Recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 632FEB3C28323E2D005A1FC0 /* Recipe.json */; };
-		632FEB44283248AF005A1FC0 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 632FEB43283248AF005A1FC0 /* Mocker */; };
 		632FEB4728324EDF005A1FC0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 632FEB4628324EDF005A1FC0 /* Alamofire */; };
-		632FEB4928324EE3005A1FC0 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 632FEB4828324EE3005A1FC0 /* Mocker */; };
 		633C1F1027E884640047BFDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C1F0F27E884640047BFDA /* AppDelegate.swift */; };
 		633C1F1227E884640047BFDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C1F1127E884640047BFDA /* SceneDelegate.swift */; };
 		633C1F1727E884640047BFDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 633C1F1527E884640047BFDA /* Main.storyboard */; };
@@ -52,7 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6326A09B28084B48008D68A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../Downloads/AppIcons/Assets.xcassets; sourceTree = "<group>"; };
+		6314EF92288E9D77000E4DC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6314EF93288E9D77000E4DC0 /* appstore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appstore.png; sourceTree = "<group>"; };
 		632EE6B927EB70AE009FF0B4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		632FEB3C28323E2D005A1FC0 /* Recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipe.json; sourceTree = "<group>"; };
 		633C1F0C27E884640047BFDA /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +90,6 @@
 			files = (
 				638EBAF6283256D0004083C0 /* Alamofire in Frameworks */,
 				63B3BF4F27FAEB3D0032DAC1 /* Alamofire in Frameworks */,
-				632FEB44283248AF005A1FC0 /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				632FEB4728324EDF005A1FC0 /* Alamofire in Frameworks */,
-				632FEB4928324EE3005A1FC0 /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +168,8 @@
 		633C1F4327E884870047BFDA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6326A09B28084B48008D68A8 /* Assets.xcassets */,
+				6314EF93288E9D77000E4DC0 /* appstore.png */,
+				6314EF92288E9D77000E4DC0 /* Assets.xcassets */,
 				633C1F1527E884640047BFDA /* Main.storyboard */,
 				633C1F1D27E884670047BFDA /* LaunchScreen.storyboard */,
 				63B3BF4B27FAE1510032DAC1 /* RecipeCell.swift */,
@@ -239,7 +238,6 @@
 			name = Reciplease;
 			packageProductDependencies = (
 				63B3BF4E27FAEB3D0032DAC1 /* Alamofire */,
-				632FEB43283248AF005A1FC0 /* Mocker */,
 				638EBAF5283256D0004083C0 /* Alamofire */,
 			);
 			productName = Reciplease;
@@ -262,7 +260,6 @@
 			name = RecipleaseTests;
 			packageProductDependencies = (
 				632FEB4628324EDF005A1FC0 /* Alamofire */,
-				632FEB4828324EE3005A1FC0 /* Mocker */,
 			);
 			productName = RecipleaseTests;
 			productReference = 633C1F2527E884670047BFDA /* RecipleaseTests.xctest */;
@@ -299,7 +296,6 @@
 			mainGroup = 633C1F0327E884640047BFDA;
 			packageReferences = (
 				63B3BF4D27FAEB3D0032DAC1 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				632FEB42283248AF005A1FC0 /* XCRemoteSwiftPackageReference "Mocker" */,
 				638EBAF4283256D0004083C0 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 633C1F0D27E884640047BFDA /* Products */;
@@ -318,9 +314,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				633C1F1F27E884670047BFDA /* LaunchScreen.storyboard in Resources */,
-				6326A09C28084B48008D68A8 /* Assets.xcassets in Resources */,
+				6314EF95288E9D77000E4DC0 /* appstore.png in Resources */,
 				633C1F1727E884640047BFDA /* Main.storyboard in Resources */,
 				63C31ED4285361C60083AD8B /* image.png in Resources */,
+				6314EF94288E9D77000E4DC0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,14 +655,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		632FEB42283248AF005A1FC0 /* XCRemoteSwiftPackageReference "Mocker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WeTransfer/Mocker.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		638EBAF4283256D0004083C0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -685,20 +674,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		632FEB43283248AF005A1FC0 /* Mocker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 632FEB42283248AF005A1FC0 /* XCRemoteSwiftPackageReference "Mocker" */;
-			productName = Mocker;
-		};
 		632FEB4628324EDF005A1FC0 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 63B3BF4D27FAEB3D0032DAC1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		632FEB4828324EE3005A1FC0 /* Mocker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 632FEB42283248AF005A1FC0 /* XCRemoteSwiftPackageReference "Mocker" */;
-			productName = Mocker;
 		};
 		638EBAF5283256D0004083C0 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
